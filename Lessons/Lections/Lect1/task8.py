@@ -1,0 +1,20 @@
+from flask import Flask
+from flask import render_template
+
+app = Flask(__name__)
+
+
+@app.route('/for/')
+def show_for():
+    context = {'title': 'Цикл',
+               'poem': ['Вот не думал, не гадал,',
+                        'Программистом взял и стал.',
+                        'Хитрый знает он язык,',
+                        'Он к другому не привык.', ]}
+               # 'name': "Федор"}
+
+    return render_template('show_for.html', **context)
+
+
+if __name__ == '__main__':
+    app.run()

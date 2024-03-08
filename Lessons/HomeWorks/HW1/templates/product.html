@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}
+    {{ super() }} - {{ title }}
+{% endblock %}
+{% block content %}
+<h3> {{prod}} </h3>
+
+<div class="row">
+    {% for na in ['Бренд', 'Цена', 'Размер'] %}
+    <div class="col-12 col-md-6 col-lg-4">
+    <h3> {{na}} </h3>
+    </div>
+    {% endfor %}
+    {% for k, vs in product.items() %}
+        {% for v in vs %}
+    <div class="col-12 col-md-6 col-lg-4">
+    <h4 align="center"> {{v}} </h4>
+    </div>
+    {% endfor %}
+    {% endfor %}
+</div>
+{% endblock %}
