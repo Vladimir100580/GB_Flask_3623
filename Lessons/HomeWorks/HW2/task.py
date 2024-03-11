@@ -11,7 +11,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    if request.cookies.get('gb_username', '') == '':
+    if request.cookies.get('gb_username') is None:
         return redirect(url_for('login'))
 
     context = {
@@ -31,11 +31,7 @@ def get_cookies():
 @app.route('/login/', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        context = {
-            'title': 'Приветствие',
-            'name': request.form.get('username')
-        }
-        response = make_response(render_template('main.html',  **context))
+        response = make_response(redirect('/'))
         response.set_cookie('gb_username', request.form.get('username'))
         response.set_cookie('gb_email', request.form.get('email'))
         return response
@@ -44,9 +40,9 @@ def login():
 
 @app.route('/logout/')
 def logout():
-    response = make_response(render_template('main.html'))
-    response.set_cookie('gb_username', '')
-    response.set_cookie('gb_email', '')
+    response = make_response(redirect('/'))
+    response.set_cookie('gb_username', '', expires=0)
+    response.set_cookie('gb_email', '', expires=0)
     return response
 
 
