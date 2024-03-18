@@ -1,13 +1,9 @@
 from multiprocessing import Process
 import urllib.request
 import time
+import parser
 
-urls = ['https://u4help.ru/photo/photo1.jpg',
-        'https://u4help.ru/photo/photo_2.jpg',
-        'https://u4help.ru/photo/photo_3.jpg',
-        'https://u4help.ru/photo/photo_4.jpg',
-        'https://u4help.ru/photo/photo_5.jpg',
-        ]
+urls = parser.st_parser()
 
 
 def download(url):
