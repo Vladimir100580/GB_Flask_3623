@@ -1,8 +1,12 @@
-from flask import Flask
-
-app = Flask(__name__)
+import time
 
 
+def slow_function():
+    print("Начало функции")
+    time.sleep(5)
+    print("Конец функции")
 
-if __name__ == '__main__':
-    app.run()
+
+print("Начало программы")
+slow_function()
+print("Конец программы")

@@ -1,9 +1,20 @@
-from flask import Flask
+import multiprocessing
+counter = multiprocessing.Value('i', 0)
 
-app = Flask(__name__)
 
-
+def increment(cnt):
+    for _ in range(30_000):
+        with cnt.get_lock():  # БЛОКИРОВКА переменной на время прибавления единицы
+            cnt.value += 1
+    print(f"Значение счетчика: {cnt.value:_}")
 
 
 if __name__ == '__main__':
-    app.run()
+    processes = []
+    for i in range(5):
+        p = multiprocessing.Process(target=increment, args=(counter,))
+        processes.append(p)
+        p.start()
+    for p in processes:
+        p.join()
+    print(f"Значение счетчика в финале: {counter.value:_}")

@@ -1,9 +1,21 @@
-from flask import Flask
+import asyncio
+from pathlib import Path
 
-app = Flask(__name__)
+
+async def process_file(file_path):
+    with open(file_path, 'r', encoding='utf-8') as f:
+        contents = f.read()
+        # do some processing with the file contents
+        print(f'{f.name} содержит {contents[:35]}...') # первые 13(35) символов внутри файла
 
 
+async def main():
+    # dir_path = Path('/path/to/directory')
+    dir_path = Path('.')
+    file_paths = [file_path for file_path in dir_path.iterdir() if file_path.is_file()]
+    tasks = [asyncio.create_task(process_file(file_path)) for file_path in file_paths]
+    await asyncio.gather(*tasks) # запуск корутины для каждого файла из текущей папки
 
 
 if __name__ == '__main__':
-    app.run()
+    asyncio.run(main())
