@@ -11,7 +11,7 @@ urls = ['https://u4help.ru/photo/photo1.jpg',
 
 
 def download(url):
-    filename = url.split('/')[-1] + '.jpg'
+    filename = url.split('/')[-1]
     urllib.request.urlretrieve(url, filename)
     print(f"Downloaded {url} in {time.time() - start_time:.2f} seconds")
 

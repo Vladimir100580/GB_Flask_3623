@@ -14,7 +14,7 @@ urls = ['https://u4help.ru/photo/photo1.jpg',
 async def download(url):
     async with aiohttp.ClientSession() as session:
         async with session.get(url) as response:
-            filename = url.split('/')[-1] + '.jpg'
+            filename = url.split('/')[-1]
             with open(filename, 'wb') as f:
                 f.write(await response.read())
             print(f"Downloaded {url} in {time.time() - start_time:.2f} seconds")
