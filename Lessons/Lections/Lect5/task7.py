@@ -1,9 +1,9 @@
-from flask import Flask
-
-app = Flask(__name__)
-
+from typing import Optional
+from pydantic import BaseModel
 
 
-
-if __name__ == '__main__':
-    app.run()
+class Item(BaseModel):
+    name: str
+    description: Optional[str] = None     # строковое описание
+    price: float
+    tax: Optional[float] = None       # Optional - опциональное значение, может быть или нет.

@@ -1,8 +1,13 @@
-from flask import Flask
+import logging
+from fastapi import FastAPI
 
-app = Flask(__name__)
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+app = FastAPI()
 
 
-
-if __name__ == '__main__':
-    app.run()
+@app.get("/")
+async def read_root():
+    logger.info('Отработал GET запрос.')
+    return {"Hello": "World"}
