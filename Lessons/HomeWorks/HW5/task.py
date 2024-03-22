@@ -26,11 +26,13 @@ class Task(BaseModel):
     status: str
 
 
-tasks = []
+tasks = []   # "Искуственная БД"
 task1 = Task(id=1, title="Квадрат суммы", description="очень крутая задача", status="не выполнена")
-task2 = Task(id=1, title="Разность квадратов", description="известная задача", status="выполняется")
+task2 = Task(id=2, title="Разность квадратов", description="известная задача", status="выполняется")
+task3 = Task(id=3, title="Поверхностные интегралы 2-го рода", description="всё просто", status="выполнена")
 tasks.append(task1)
 tasks.append(task2)
+tasks.append(task3)
 
 
 @app.get("/tasks", response_model=List[Task])
@@ -38,7 +40,7 @@ async def get_tasks():
     return tasks
 
 
-@app.get("/tasks/{task_id}", response_model=Task)
+@app.get("/task/{task_id}", response_model=Task)
 async def get_task(task_id: int):
     for task in tasks:
         if task.id == task_id:
@@ -46,7 +48,7 @@ async def get_task(task_id: int):
     raise HTTPException(status_code=404, detail="Задача не найдена")
 
 
-@app.post("/tasks", status_code=201)
+@app.post("/task_add", status_code=201)
 async def create_task(task: Task):
     tasks.append(task)
     return "Задача добавлена"
@@ -61,8 +63,11 @@ async def update_task(task_id: int, updated_task: Task):
     raise HTTPException(status_code=404, detail="Задача не найдена")
 
 
-@app.delete("/tasks/{task_id}", status_code=200)
+@app.delete("/task/{task_id}", status_code=200)
 async def delete_task(task_id: int):
     global tasks
+    l1 = len(tasks)
     tasks = [task for task in tasks if task.id != task_id]
-    return "Задача удалена"
+    if l1 != len(tasks):
+        return "Задача удалена"
+    return "Задачи с указанным id не существует"
