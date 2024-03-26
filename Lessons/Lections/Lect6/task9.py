@@ -1,9 +1,8 @@
-from flask import Flask
+from fastapi import FastAPI, Path
 
-app = Flask(__name__)
-
-
+app = FastAPI()
 
 
-if __name__ == '__main__':
-    app.run()
+@app.get("/items/{item_id}")
+async def read_item(item_id: int = Path(..., title="The ID of the item", ge=1), q: str = None):  # ... обязательное поле item_id
+    return {"item_id": item_id, "q": q}

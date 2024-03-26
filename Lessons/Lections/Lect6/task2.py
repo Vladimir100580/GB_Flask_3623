@@ -1,8 +1,9 @@
-from flask import Flask
-
-app = Flask(__name__)
+from pydantic import BaseModel, Field
 
 
+class Item(BaseModel):
+    name: str = Field(max_length=10)
 
-if __name__ == '__main__':
-    app.run()
+
+class User(BaseModel):
+    age: int = Field(default=0)

@@ -1,8 +1,21 @@
-from flask import Flask
+from typing import List
+from fastapi import FastAPI
+from pydantic import BaseModel
 
-app = Flask(__name__)
+app = FastAPI()
 
 
+class Item(BaseModel):
+    name: str
+    price: float
+    is_offer: bool = None
 
-if __name__ == '__main__':
-    app.run()
+
+class User(BaseModel):
+    username: str
+    full_name: str = None
+
+
+class Order(BaseModel):
+    items: List[Item]
+    user: User

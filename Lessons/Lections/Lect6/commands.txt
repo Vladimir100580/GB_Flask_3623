@@ -1,0 +1,18 @@
+curl -X 'POST' 'http://127.0.0.1:8000/items/' -H 'accept: application/json' -H 'Content-Type: application/json' -d '{"name": "54htr", "price": 2, "description": "stringgggggggg", "tax": 4.6}'
+
+
+uvicorn Lessons.Lections.Lect6.task6:app --reload
+
+
+
+curl -X 'POST' 'http://127.0.0.1:8000/users/' -H 'accept: application/json' -H 'Content-Type: application/json' -d '{"name": "vov4ik", "email": "der@mazay.ru"}'
+
+
+curl -X POST http://127.0.0.1:8000/users/ -H accept: application/json -H Content-Type: application/json -d {'name': 'vov4ik', 'email': der@mazay.ru'}
+
+
+curl -X "POST" "http://127.0.0.1:8000/users/" -H "accept: application/json" -H "Content-Type: application/json" -d "{'name': 'vov4ik', 'email': 'der@mazay.ru'}"
+
+curl -X "POST" "http://127.0.0.1:8000/users/" -H "accept: application/json" -H "Content-Type: application/json" -d "{"name": "vov4ik", "email": "der@mazay.ru"}"
+
+curl -X 'GET' 'http://127.0.0.1:8000/items/?q=12343' -H 'accept: application/json'

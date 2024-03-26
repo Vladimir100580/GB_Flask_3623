@@ -1,8 +1,16 @@
-from flask import Flask
+from fastapi import FastAPI
+from pydantic import BaseModel, Field
 
-app = Flask(__name__)
+app = FastAPI()
 
 
+class Item(BaseModel):
+    name: str = Field(..., title="Name", max_length=50)   # '...' - обязательное поле
+    price: float = Field(..., title="Price", gt=0, le=100000)  # gt - grate, ge - grete-equal
+    description: str = Field(default=None, title="Description", max_length=1000)
+    tax: float = Field(0, title="Tax", ge=0, le=10)
 
-if __name__ == '__main__':
-    app.run()
+
+class User(BaseModel):
+    username: str = Field(title="Username", max_length=50)
+    full_name: str = Field(None, title="Full Name", max_length=100)

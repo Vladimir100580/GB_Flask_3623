@@ -1,0 +1,1 @@
+uvicorn Lessons.HomeWorks.HW6.task:app --reload
